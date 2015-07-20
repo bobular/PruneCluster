@@ -587,7 +587,11 @@ var PruneClusterForLeaflet = (L.Layer ? L.Layer : L.Class).extend({
                 data._leafletOldHashCode = 0;
                 return;
             }
-            var position = new L.LatLng(cluster.averagePosition.lat, cluster.averagePosition.lng);
+            //FixMe: Find a better way to store and calculate trafficlight because storing it in weight messes up
+            // average position calculation
+            var position = new L.LatLng(cluster.position.lat, cluster.position.lng);
+            //var position = new L.LatLng(cluster.averagePosition.lat, cluster.averagePosition.lng);
+
             var oldMarker = data._leafletMarker;
             if (oldMarker) {
                 if (cluster.population === 1 && data._leafletOldPopulation === 1 && cluster.hashCode === oldMarker._hashCode) {
